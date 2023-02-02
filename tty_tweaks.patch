@@ -1,0 +1,24 @@
+diff --git a/WinPort/src/Backend/WinPortMain.cpp b/WinPort/src/Backend/WinPortMain.cpp
+--- a/WinPort/src/Backend/WinPortMain.cpp
++++ b/WinPort/src/Backend/WinPortMain.cpp
+@@ -235,7 +235,7 @@ struct ArgOptions
+ 	const char *nodetect = "";
+ 	bool tty = false, far2l_tty = false, notty = false;
+ 	bool mortal = false;
+-	unsigned int esc_expiration = 0;
++	unsigned int esc_expiration = 100; // by unxed: enable by default
+ 	std::vector<char *> filtered_argv;
+ 
+ 	ArgOptions() = default;
+diff --git a/WinPort/src/Backend/TTY/TTYBackend.h b/WinPort/src/Backend/TTY/TTYBackend.h
+--- a/WinPort/src/Backend/TTY/TTYBackend.h
++++ b/WinPort/src/Backend/TTY/TTYBackend.h
+@@ -28,7 +28,7 @@
+ 		FKS_NOT_SUPPORTED
+ 	} _fkeys_support = FKS_UNKNOWN;
+ 
+-	unsigned int _esc_expiration = 0;
++	unsigned int _esc_expiration = 100;
+ 	int _notify_pipe = -1;
+ 	int *_result = nullptr;
+ 	int _kickass[2] = {-1, -1};

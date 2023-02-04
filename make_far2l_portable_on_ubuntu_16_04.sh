@@ -25,7 +25,7 @@ cd install
 rm -rf ./lib
 mkdir lib
 if [ -f "./Plugins/luafar/luafar2l.so" ]; then
-  cp ./Plugins/luafar/luafar2l.so ./lib/luafar2l.so
+  mv ./Plugins/luafar/luafar2l.so ./lib/luafar2l.so
 fi
 if [ -f "/usr/lib/x86_64-linux-gnu/libluajit-5.1.so.2.0.4" ]; then
   cp /usr/lib/x86_64-linux-gnu/libluajit-5.1.so.2.0.4 ./lib/libluajit-5.1.so
@@ -37,6 +37,7 @@ else
 fi
 chmod +x autonomizer.sh
 ./autonomizer.sh
+rm autonomizer.sh
 rm lib/libc.so.6
 rm lib/libdl.so.2
 rm lib/libgcc_s.so.1

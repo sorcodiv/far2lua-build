@@ -1,6 +1,6 @@
 # portable far2m build scripts
 
-Scripts for building portable version of far2m(https://github.com/shmuz/far2m) - Linux port of [FAR Manager](http://farmanager.com/), fork of far2l(https://github.com/elfmz/far2l) with FAR3 macro system (LuaMacro).
+Scripts for building portable version of [far2m](https://github.com/shmuz/far2m) - Linux port of [FAR Manager](http://farmanager.com/), fork of [far2l](https://github.com/elfmz/far2l) with FAR3 macro system (LuaMacro).
 
 This is modified version of [far2l building script](https://github.com/unxed/far2l-deb) (deprecated).
 

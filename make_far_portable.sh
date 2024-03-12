@@ -24,6 +24,18 @@ if [ -f "/usr/lib/x86_64-linux-gnu/libluajit-5.1.so.2.0.4" ]; then
   cp --preserve=timestamps /usr/lib/x86_64-linux-gnu/libluajit-5.1.so.2.0.4 ./lib/libluajit-5.1.so
 fi
 
+if [ -f "/usr/local/lib/lua/5.1/lfs.so" ]; then
+  cp --preserve=timestamps /usr/local/lib/lua/5.1/lfs.so ./lib/
+fi
+
+if [ -f "/usr/local/lib/lua/5.1/lpeg.so" ]; then
+  cp --preserve=timestamps /usr/local/lib/lua/5.1/lpeg.so ./lib/
+fi
+
+if [ -d "/usr/local/share/lua/5.1" ]; then
+  cp -r --preserve=timestamps /usr/local/share/lua/5.1 ./
+fi
+
 cp ../../../autonomizer.sh .
 chmod +x autonomizer.sh
 ./autonomizer.sh
@@ -38,10 +50,14 @@ rm lib/libstdc++.so.6
 rm lib/libresolv.so.2
 rm lib/librt.so.1
 
+echo '#!/bin/sh' >far_run
+echo 'LUA_PATH="$LUA_PATH;$(dirname $(realpath $0))/5.1/?.lua;$(dirname $(realpath $0))/5.1/?/init.lua;" LUA_CPATH="$LUA_CPATH;$(dirname $(realpath $0))/lib/?.so;" "$(dirname $(realpath $0))/far2m" "$@"' >>far_run
+chmod +x far_run
+
 cd ..
 mv install far_portable
 
 chmod +x ../../makeself/makeself.sh
-../../makeself/makeself.sh --keep-umask --nocomp far_portable far_portable.run far2m ./far2m
+../../makeself/makeself.sh --keep-umask --nocomp far_portable far_portable.run far2m ./far_run
 chmod 755 far_portable.run
 mv far_portable.run ../../far

@@ -16,7 +16,8 @@ Tested on version 16.04.7, SHA256SUMS: b23488689e16cad7a269eb2d3a3bf725d3457ee6b
 
 ``` sh
 sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
-sudo apt-get install -y libspdlog-dev patchelf gawk m4 libx11-dev libxi-dev libxerces-c-dev libuchardet-dev libssh-dev libssl-dev libnfs-dev libneon27-dev libarchive-dev libpcre3-dev git cmake g++ libsmbclient-dev libwxgtk3.0-dev libluajit-5.1-dev luajit uuid-dev
+sudo apt-get install -y libspdlog-dev patchelf gawk m4 libx11-dev libxi-dev libxerces-c-dev libuchardet-dev libssh-dev libssl-dev libnfs-dev libneon27-dev libarchive-dev libpcre3-dev git cmake g++ libsmbclient-dev libwxgtk3.0-dev libluajit-5.1-dev luajit uuid-dev luarocks
+sudo luarocks install moonscript --lua-version=5.1
 ```
 
 #### Download `autonomizer.sh` and `make_far_portable.sh`, run `make_far_portable.sh`

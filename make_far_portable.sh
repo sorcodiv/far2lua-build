@@ -5,15 +5,13 @@ git clone --depth=1 https://github.com/shmuz/far2m
 
 sed -i 's/unsigned int esc_expiration = 0;/unsigned int esc_expiration = 100;/' far2m/WinPort/src/Backend/WinPortMain.cpp
 sed -i 's/unsigned int _esc_expiration = 0;/unsigned int _esc_expiration = 100;/' far2m/WinPort/src/Backend/TTY/TTYBackend.h
-sed -i 's/AddPlugin( netcfg        wide  1 )/#AddPlugin( netcfg        wide  1 )/' far2m/CMakeLists.txt
-rm -rf ./far2m/netcfg
 
 cd far2m
 
 rm -rf ./_build
 mkdir _build
 cd _build
-cmake -DUSEWX=yes -DLEGACY=no -DCMAKE_BUILD_TYPE=Release ..
+cmake -DUSEWX=yes -DNETCFG=no -DLEGACY=no -DCMAKE_BUILD_TYPE=Release ..
 make -j$(nproc --all)
 
 cd install

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-git clone --depth=1 https://github.com/megastep/makeself
-git clone --depth=1 https://github.com/shmuz/far2m
+if [ ! -d "far2m" ]; then git clone --depth=1 https://github.com/shmuz/far2m; fi
+if [ ! -d "makeself" ]; then git clone --depth=1 https://github.com/megastep/makeself; fi
 
 sed -i 's/unsigned int esc_expiration = 0;/unsigned int esc_expiration = 100;/' far2m/WinPort/src/Backend/WinPortMain.cpp
 sed -i 's/unsigned int _esc_expiration = 0;/unsigned int _esc_expiration = 100;/' far2m/WinPort/src/Backend/TTY/TTYBackend.h
@@ -18,8 +18,14 @@ cd install
 rm -rf ./lib
 mkdir lib
 
-if [ -f "/usr/lib/x86_64-linux-gnu/libluajit-5.1.so.2.0.4" ]; then
-  cp --preserve=timestamps /usr/lib/x86_64-linux-gnu/libluajit-5.1.so.2.0.4 ./lib/libluajit-5.1.so
+lua_lib=$(find /usr/lib -name libluajit-5.1.so.2.0.4)
+lua_dst="libluajit-5.1.so"
+if [ ! -f "$lua_lib" ]; then
+  lua_lib=$(find /usr/lib -name liblua5.1.so.0.0.0)
+  lua_dst=liblua5.1.so
+fi
+if [ -f "$lua_lib" ]; then
+  cp --preserve=timestamps $lua_lib ./lib/$lua_dst
 fi
 
 if [ -f "/usr/local/lib/lua/5.1/lfs.so" ]; then
@@ -56,6 +62,6 @@ cd ..
 mv install far_portable
 
 chmod +x ../../makeself/makeself.sh
-../../makeself/makeself.sh --keep-umask --nocomp far_portable far_portable.run far2m ./far_run
+../../makeself/makeself.sh --keep-umask --nocomp --nox11 --nowait --nomd5 --nocrc far_portable far_portable.run far2m ./far_run
 chmod 755 far_portable.run
 mv far_portable.run ../../far
